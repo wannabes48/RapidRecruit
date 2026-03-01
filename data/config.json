@@ -1,0 +1,15 @@
+{
+  "weights": {
+    "required_skills": 0.50,
+    "preferred_skills": 0.25,
+    "experience": 0.15,
+    "keywords": 0.10
+  },
+  "thresholds": {
+    "shortlist_score": 75,
+    "potential_match": 50
+  },
+  "experience_keywords": [
+    "years", "experience", "senior", "lead", "manager", "professional"
+  ]
+}

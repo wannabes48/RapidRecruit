@@ -1,0 +1,15 @@
+{
+  "software_development": {
+    "required": ["Python", "JavaScript", "Git", "SQL"],
+    "preferred": ["React.js", "Node.js", "TypeScript", "Docker"],
+    "keywords": ["Agile", "REST API", "Microservices", "Unit Testing", "CI/CD"]
+  },
+  "data_science": {
+    "required": ["Python", "Pandas", "Scikit-Learn", "Statistics"],
+    "preferred": ["NLP", "PyTorch", "TensorFlow", "Power BI", "Supabase"],
+    "keywords": ["Machine Learning", "Data Mining", "Feature Engineering", "Big Data"]
+  },
+  "common_tools": {
+    "keywords": ["Jira", "VS Code", "Postman", "AWS", "Linux"]
+  }
+}
