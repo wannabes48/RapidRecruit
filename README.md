@@ -1,7 +1,8 @@
 🚀 RapidRecruit: High-Performance Résumé Screening
 RapidRecruit is a Python-based screening system designed to handle large volumes of applications using Multiprocessing. It automates the initial phase of recruitment by objectively ranking candidates against specific Job Descriptions (JD).
 
-🛠 How the System WorksThe project consists of four core components:
+🛠 How the System Works
+The project consists of four core components:
 -Résumé Parser: Leverages parallel processing to read PDF/DOCX files and extract raw text.
 -JD Parser: Analyzes the job description to identify mandatory vs. preferred skills.
 -Keyword Extractor: Cross-references résumé content against a curated skills taxonomy.
