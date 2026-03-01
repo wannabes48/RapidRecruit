@@ -1,61 +1,22 @@
-How the System Works
-The project consists of four core components:
-
-Résumé Parser: Reads PDF and DOCX files and extracts text
-
-JD Parser: Analyses the job description to identify required skills
-
-Keyword Extractor: Matches résumé content against a skills taxonomy
-
-Scoring Engine: Ranks candidates using a weighted algorithm
-
-Scoring Formula
-Here’s the scoring formula we’ll use:
-
-Total Score =
-(Required Skills × 50%) +
-(Preferred Skills × 25%) +
-(Experience × 15%) +
-(Keywords × 10%)
-This approach ensures that essential skills carry more weight than secondary keywords.
-
-How This Approach Helps Reduce Bias
-This system evaluates résumés using predefined criteria instead of subjective judgment. Each résumé is scored based on the same set of required skills, preferred skills, experience indicators, and keywords.
-
-Because all candidates are evaluated using the same weighted formula, personal factors such as writing style, formatting, or unconscious preferences don’t influence the ranking. The scoring logic focuses only on how closely a résumé matches the job requirements.
-
-By normalising the evaluation process, the system promotes more consistent and objective screening, which helps reduce bias during the initial résumé review stage.
-
-System Architecture
-Input                    Processing                     Output
-─────                    ──────────                     ──────
-
-Résumés ──► Résumé Parser ──► Keyword Extractor ──┐
-(PDF/DOCX)                                        │
-                                                  ├──► Scoring Engine ──► Ranked Results
-Job Description ──► JD Parser ────────────────────┘
-(TXT/PDF)
-The system follows a simple input–process–output flow.
-
-Résumés and the job description are provided as inputs. The Résumé Parser extracts text from each résumé, while the JD Parser identifies required and preferred skills from the job description.
-
-The extracted résumé text is then passed to the Keyword Extractor, which matches skills and keywords using a predefined taxonomy.
-
-Finally, the Scoring Engine applies a weighted formula to calculate a score for each candidate and outputs a ranked list of résumés.
-
-Project Structure
-resume_screening_system/
+🚀 RapidRecruit: High-Performance Résumé ScreeningRapidRecruit is a Python-based screening system designed to handle large volumes of applications using Multiprocessing. It automates the initial phase of recruitment by objectively ranking candidates against specific Job Descriptions (JD).🛠 How the System WorksThe project consists of four core components:Résumé Parser: Leverages parallel processing to read PDF/DOCX files and extract raw text.JD Parser: Analyzes the job description to identify mandatory vs. preferred skills.Keyword Extractor: Cross-references résumé content against a curated skills taxonomy.Scoring Engine: Ranks candidates using a weighted, multi-factor algorithm.📊 Scoring Logic & Bias ReductionTo ensure objective evaluation, the system applies a consistent weighted formula to every candidate:$$Total\ Score = (R \times 0.50) + (P \times 0.25) + (E \times 0.15) + (K \times 0.10)$$Where:$R$ (Required Skills): 50% weight (The "Must-Haves").$P$ (Preferred Skills): 25% weight (The "Nice-to-Haves").$E$ (Experience): 15% weight (Years/Seniority indicators).$K$ (Keywords): 10% weight (General industry terminology).⚖️ Reducing BiasBy normalizing the evaluation process, RapidRecruit removes subjective judgment from the initial screen. Factors like formatting, font choice, or name-based unconscious bias are ignored in favor of hard skill matching.🏗 System ArchitectureCode snippetgraph LR
+    A[Résumés PDF/DOCX] --> B[Résumé Parser]
+    C[Job Description] --> D[JD Parser]
+    B --> E[Keyword Extractor]
+    D --> E
+    E --> F[Scoring Engine]
+    F --> G[Ranked Results/Dashboard]
+📂 Project StructurePlaintextresume_screening_system/
 ├── app.py                    # Streamlit web interface
-├── main.py                   # Command-line interface
+├── main.py                   # CLI for bulk processing
 ├── parsers/
-│   ├── resume_parser.py      # PDF/DOCX text extraction
+│   ├── resume_parser.py      # PDF/DOCX text extraction (Multiprocessing)
 │   └── jd_parser.py          # Job description parsing
 ├── extractors/
 │   └── keyword_extractor.py  # Skills and experience extraction
 ├── matcher/
-│   └── scorer.py             # Scoring algorithm
+│   └── scorer.py             # Scoring algorithm logic
 ├── data/
-│   ├── config.json           # Scoring weights
+│   ├── config.json           # Adjustable scoring weights
 │   └── skills_taxonomy.json  # Skills database
-└── requirements.txt          # Dependencies
-The project is organised into clear, modular directories. Parsing logic, keyword extraction, and scoring are separated into their own folders, while configuration files and data are kept isolated. This structure keeps the codebase easy to navigate, maintain, and extend.
+└── requirements.txt          # Dependencies (PyMuPDF, Spacy, etc.)
+⚡ Multiprocessing AdvantageUnlike standard parsers, RapidRecruit utilizes Python's multiprocessing module to distribute the parsing workload across all available CPU cores. This allows the system to process hundreds of résumés in the time it usually takes to process ten.
