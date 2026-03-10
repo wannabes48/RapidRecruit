@@ -1,55 +1,71 @@
-🚀 RapidRecruit: High-Performance Résumé Screening</br>
-RapidRecruit is a Python-based screening system designed to handle large volumes of applications using Multiprocessing.</br>
-It automates the initial phase of recruitment by objectively ranking candidates against specific Job Descriptions (JD).</br>
+## 🛠 Developer Documentation </br>
 
-🛠 How the System Works</br>
-The project consists of four core components:</br>
--Résumé Parser: Leverages parallel processing to read PDF/DOCX files and extract raw text.</br>
--JD Parser: Analyzes the job description to identify mandatory vs. preferred skills.</br>
--Keyword Extractor: Cross-references résumé content against a curated skills taxonomy.</br>
--Scoring Engine: Ranks candidates using a weighted, multi-factor algorithm.</br>
+Welcome! This section is for developers who want to contribute to **RapidRecruit**.</br>
 
-📊 Scoring Logic & Bias Reduction</br>
-To ensure objective evaluation, the system applies a consistent weighted formula to every candidate:</br>
+### 🏗 Architecture Overview</br>
 
-$$Total Score = (R \times 0.50) + (P \times 0.25) + (E \times 0.15) + (K \times 0.10)$$</br>
+RapidRecruit uses a **Modular Pipe-and-Filter** architecture. Each component is isolated to ensure that changing the parsing logic (e.g., switching from `PyPDF2` to `pdfplumber`) does not affect the scoring engine.</br>
 
-Where:</br>
-$R$ (Required Skills): 50% weight (The "Must-Haves").</br>
-$P$ (Preferred Skills): 25% weight (The "Nice-to-Haves").</br>
-$E$ (Experience): 15% weight (Years/Seniority indicators).</br>
-$K$ (Keywords): 10% weight (General industry terminology).</br>
+### 🚀 Performance Strategy: Multiprocessing</br>
 
-⚖️ Reducing Bias</br>
-By normalizing the evaluation process, RapidRecruit removes subjective judgment from the initial screen. Factors like formatting, font choice, or name-based unconscious bias are ignored in favor of hard skill matching.
+To handle high-volume screening, the system utilizes Python's `multiprocessing.Pool`.</br>
 
-🏗 System Architecture</br>
+* **The Challenge:** PDF parsing is CPU-intensive and can block the MainThread in Streamlit.</br>
+* **The Solution:** We spawn a worker for every CPU core available. Each worker independently initializes its own `ResumeParser` and `Scorer` to avoid shared-state memory issues.</br>
 
-graph LR</br>
-    A[Résumés PDF/DOCX] --> B[Résumé Parser]</br>
-    C[Job Description] --> D[JD Parser]</br>
-    B --> E[Keyword Extractor]</br>
-    D --> E</br>
-    E --> F[Scoring Engine]</br>
-    F --> G[Ranked Results/Dashboard]</br>
+### 🛠 Local Development Setup</br>
 
-📂 Project Structure</br>
+1. **Clone & Environment:**</br>
+```bash
+git clone https://github.com/wannabes48/RapidRecruit.git</br>
+cd RapidRecruit</br>
+python -m venv venv</br>
+source venv/bin/scripts/activate  # Windows: venv\Scripts\activate</br>
 
-resume_screening_system/</br>
-├── app.py                    # Streamlit web interface</br>
-├── main.py                   # CLI for bulk processing</br>
-├── parsers/</br>
-│   ├── resume_parser.py      # PDF/DOCX text extraction (Multiprocessing)</br>
-│   └── jd_parser.py          # Job description parsing</br>
-├── extractors/</br>
-│   └── keyword_extractor.py  # Skills and experience extraction</br>
-├── matcher/</br>
-│   └── scorer.py             # Scoring algorithm logic</br>
-├── data/</br>
-│   ├── config.json           # Adjustable scoring weights</br>
-│   └── skills_taxonomy.json  # Skills database</br>
-└── requirements.txt          # Dependencies (PyMuPDF, Spacy, etc.)</br>
+```
 
-⚡ Multiprocessing Advantage</br>
-Unlike standard parsers, RapidRecruit utilizes Python's multiprocessing module to distribute the parsing workload across all available CPU cores.</br>
-This allows the system to process hundreds of résumés in the time it usually takes to process ten.
+
+2. **Install Dependencies:**</br>
+```bash</br>
+pip install -r requirements.txt</br>
+
+```
+
+
+3. **Running Tests:**</br>
+We use `pytest` for unit testing. Always run tests before pushing changes:</br>
+```bash
+python -m pytest tests/</br>
+
+```
+
+
+
+---
+
+### 📂 Core Module Responsibilities</br>
+
+| Module | Responsibility | Key File |</br>
+| --- | --- | --- |</br>
+| **Parsers** | Converts binary files (PDF/DOCX) to clean strings. | `resume_parser.py` |</br>
+| **Extractors** | Uses Regex and Taxonomy to find entities in text. | `keyword_extractor.py` |</br>
+| **Matcher** | Applies weighted math to extracted data. | `scorer.py` |</br>
+| **Interface** | Manages the Streamlit state and file buffers. | `app.py` |</br>
+
+---</br>
+
+### 🤝 How to Contribute</br>
+
+We follow a standard **Feature Branch** workflow:</br>
+
+1. **Fork the Repo** and create your branch: `git checkout -b feature/AmazingFeature`.</br>
+2. **Update the Taxonomy:** If adding new industries, update `data/skills_taxonomy.json`.</br>
+3. **Refine the Scorer:** If improving the algorithm, ensure the final score is always normalized between **0 and 100**.</br>
+4. **Commit Changes:** Use descriptive messages (`git commit -m 'Add support for .rtf files'`).</br>
+5. **Push & PR:** Push to the branch and open a **Pull Request**.</br>
+
+### 📝 Coding Standards</br>
+
+* **Type Hinting:** Use Python type hints (e.g., `def func(text: str) -> int:`) for all new functions.</br>
+* **Error Handling:** Always wrap file I/O operations in `try-except` blocks to prevent the multiprocessing pool from crashing on a single corrupt PDF.</br>
+* **Documentation:** Add docstrings to all classes and public methods.</br>
