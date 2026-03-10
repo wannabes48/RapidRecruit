@@ -17,17 +17,17 @@ To handle high-volume screening, the system utilizes Python's `multiprocessing.P
 
 1. **Clone & Environment:**</br>
 ```bash
-git clone https://github.com/wannabes48/RapidRecruit.git</br>
-cd RapidRecruit</br>
-python -m venv venv</br>
-source venv/bin/scripts/activate  # Windows: venv\Scripts\activate</br>
+git clone https://github.com/wannabes48/RapidRecruit.git
+cd RapidRecruit
+python -m venv venv
+source venv/bin/scripts/activate  # Windows: venv\Scripts\activate
 
 ```
 
 
 2. **Install Dependencies:**</br>
 ```bash</br>
-pip install -r requirements.txt</br>
+pip install -r requirements.txt
 
 ```
 
@@ -35,7 +35,7 @@ pip install -r requirements.txt</br>
 3. **Running Tests:**</br>
 We use `pytest` for unit testing. Always run tests before pushing changes:</br>
 ```bash
-python -m pytest tests/</br>
+python -m pytest tests/
 
 ```
 
@@ -45,12 +45,11 @@ python -m pytest tests/</br>
 
 ### 📂 Core Module Responsibilities</br>
 
-| Module | Responsibility | Key File |</br>
-| --- | --- | --- |</br>
-| **Parsers** | Converts binary files (PDF/DOCX) to clean strings. | `resume_parser.py` |</br>
-| **Extractors** | Uses Regex and Taxonomy to find entities in text. | `keyword_extractor.py` |</br>
-| **Matcher** | Applies weighted math to extracted data. | `scorer.py` |</br>
-| **Interface** | Manages the Streamlit state and file buffers. | `app.py` |</br>
+| Module         | Responsibility                                     | Key File               |</br>
+| **Parsers**    | Converts binary files (PDF/DOCX) to clean strings. | `resume_parser.py`     |</br>
+| **Extractors** | Uses Regex and Taxonomy to find entities in text.  | `keyword_extractor.py` |</br>
+| **Matcher**    | Applies weighted math to extracted data.           | `scorer.py`            |</br>
+| **Interface**  | Manages the Streamlit state and file buffers.      | `app.py`               |</br>
 
 ---</br>
 
