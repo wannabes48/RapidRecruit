@@ -1,15 +1,53 @@
 {
   "software_development": {
-    "required": ["Python", "JavaScript", "Git", "SQL"],
-    "preferred": ["React.js", "Node.js", "TypeScript", "Docker"],
-    "keywords": ["Agile", "REST API", "Microservices", "Unit Testing", "CI/CD"]
+    "required": [
+      ["Python", "Py3", "CPython", "Django", "Flask"],
+      ["JavaScript", "JS", "ES6", "Vanilla JS"],
+      ["Git", "GitHub", "GitLab", "Bitbucket", "Version Control"],
+      ["SQL", "MySQL", "PostgreSQL", "Relational Database"]
+    ],
+    "preferred": [
+      ["React.js", "React", "ReactJS"],
+      ["Node.js", "Node", "NodeJS", "Express"],
+      ["TypeScript", "TS"],
+      ["Docker", "Containers", "Containerization", "Kubernetes", "K8s"]
+    ],
+    "keywords": [
+      ["Agile", "Scrum", "Kanban", "Sprints"],
+      ["REST API", "RESTful", "GraphQL"],
+      ["Microservices", "SOA", "Service-Oriented Architecture"],
+      ["Unit Testing", "TDD", "Test-Driven Development", "pytest", "Jest"],
+      ["CI/CD", "Continuous Integration", "Continuous Deployment", "Jenkins", "GitHub Actions"]
+    ]
   },
   "data_science": {
-    "required": ["Python", "Pandas", "Scikit-Learn", "Statistics"],
-    "preferred": ["NLP", "PyTorch", "TensorFlow", "Power BI", "Supabase"],
-    "keywords": ["Machine Learning", "Data Mining", "Feature Engineering", "Big Data"]
+    "required": [
+      ["Python", "Py3", "CPython"],
+      ["Pandas", "DataFrames"],
+      ["Scikit-Learn", "sklearn"],
+      ["Statistics", "Statistical Modeling", "Probability"]
+    ],
+    "preferred": [
+      ["NLP", "Natural Language Processing", "Text Mining", "Spacy", "NLTK"],
+      ["PyTorch", "Torch"],
+      ["TensorFlow", "TF", "Keras"],
+      ["Power BI", "Tableau", "Data Visualization"],
+      ["Supabase", "Firebase", "PostgreSQL"]
+    ],
+    "keywords": [
+      ["Machine Learning", "ML", "Predictive Modeling"],
+      ["Data Mining", "Data Extraction"],
+      ["Feature Engineering", "Data Preprocessing"],
+      ["Big Data", "Hadoop", "Spark", "PySpark"]
+    ]
   },
   "common_tools": {
-    "keywords": ["Jira", "VS Code", "Postman", "AWS", "Linux"]
+    "keywords": [
+      ["Jira", "Atlassian", "Issue Tracking"],
+      ["VS Code", "Visual Studio Code"],
+      ["Postman", "API Testing"],
+      ["AWS", "Amazon Web Services", "Cloud Computing", "EC2", "S3"],
+      ["Linux", "Unix", "Ubuntu", "CentOS"]
+    ]
   }
 }
